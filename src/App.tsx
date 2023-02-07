@@ -1,34 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useCounterStore } from './store/counterStore';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const count = useCounterStore((state) => state.count )
+  const names = useCounterStore((state) => state.nombres )
+  const lastNames = useCounterStore((state) => state.apellidos )
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Hans Puente</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <>
+      <h1 className="text-3xl font-bold text-green-400">Counter: {count}</h1>
+      <h1 className="text-3xl font-bold text-green-400">Nombres: {names}</h1>
+      <h1 className="text-3xl font-bold text-green-400">Apellidos: {lastNames}</h1>
+    </>
+  );
+};
 
-export default App
+export default App;
