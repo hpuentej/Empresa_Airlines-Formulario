@@ -1,8 +1,8 @@
 const AdditionalInfo = () => {
   return (
-    <div>
-      <h1 className="text-center">Gracias por confiar en nosotros</h1>
-      <h1 className="text-center">
+    <div className="mb-12">
+      <h1 className="text-center text-xl">Gracias por confiar en nosotros</h1>
+      <h1 className="text-center text-xl">
         <span className="font-semibold mr-1">
           Empresa Airlines está presente en:
         </span>
