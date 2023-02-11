@@ -4,6 +4,7 @@ import { RegisterView } from "./childrens";
 import { Layout } from "../../components/organisms";
 
 const Form = () => {
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])

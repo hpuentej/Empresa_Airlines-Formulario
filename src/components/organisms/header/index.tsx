@@ -2,7 +2,7 @@ import { Titulo } from "./childrens";
 
 const Header = () => {
   return (
-    <header className="container text-center overflow-hidden mx-auto pt-3 pb-6">
+    <header className="container text-center overflow-hidden mx-auto pt-3 pb-5">
       <div>
         <Titulo />
       </div>
