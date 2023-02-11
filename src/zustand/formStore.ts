@@ -1,13 +1,11 @@
 import { create } from 'zustand';
 
-interface CounterState {
-  count: number;
+interface CounterState {  
   nombres: string;
   apellidos: string;
 }
 
-export const useCounterStore = create<CounterState>(() => ({
-  count: 57,
+export const useClientStore = create<CounterState>(() => ({  
   nombres: 'Hans Junior',
   apellidos: 'Puente Jara',
 }))

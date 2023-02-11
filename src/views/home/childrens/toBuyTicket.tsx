@@ -9,14 +9,14 @@ const ToBuyTicket = () => {
   return (
     <>
       <section className="bg-violet-300 py-10 mb-4">
-        <div className="container flex flex-col text-3xl text-center bg-indigo-800 py-16 mx-auto rounded-lg justify-around">
-          <h1 className="mb-12 text-white">Tour Especial</h1>
-          <div className="sm:flex sm:justify-evenly">
-            <h1 className="flex text-slate-400 items-center mx-4">
+        <div className="container overflow-hidden flex flex-col text-3xl text-center bg-indigo-800 py-16 mx-auto rounded-lg justify-around">
+          <h1 className="mb-4 text-white">Tour Especial</h1>
+          <div className="flex flex-col sm:flex sm:flex-row  sm:justify-evenly">
+            <h1 className="text-slate-400 items-center mb-6 sm:mb-6 md:mx-4 md:my-4 sm:self-center">
               Destinos: Venezuela, Ucrania y Perú
             </h1>
-            <div className="bg-slate-300 border-4 border-slate-300 hover:border-white rounded-3xl
-             mb-5 mx-32 sm:py-2 sm:px-2 sm:mr-3 flex-none">
+            <div className="bg-slate-300 border-4 border-slate-300 hover:border-white rounded-3xl sm:self-center
+             mb-5 mx-10 md:mx-12 md:my-3 sm:py-2 sm:px-2 sm:mr-3">
               <h1 className="py-3 text-slate-400 hover:text-slate-800">
                 PASSENGERS
               </h1>
@@ -27,7 +27,7 @@ const ToBuyTicket = () => {
                 </h1>
               </div>
             </div>
-            <button className="font-semibold bg-red-500 hover:bg-red-600 rounded-3xl text-white py-6 px-6 sm:px-6 sm:mx-5 flex-none">
+            <button className="font-semibold bg-red-500 hover:bg-red-600 rounded-3xl text-white py-6 mx-32 sm:px-6 sm:mx-5 md:mx-5 md:px-6">
               <Link to="../../form">Register</Link>
             </button>
           </div>
