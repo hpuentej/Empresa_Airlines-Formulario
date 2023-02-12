@@ -1,10 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import {Passenger, Passengers} from "../../../assets/images/icons";
-import { Count} from "../../../views"
+import { Count } from "../../../views"
+import { usePassengerStore } from "../../../zustand/formStore";
+import { shallow } from "zustand/shallow";
 
 const ToBuyTicket = () => {
-  const [passengers, setPassengers] = useState(1);
+  const { count } = usePassengerStore((state) => ({
+    count: state.count,
+  }), shallow);
+
+  const toggle = usePassengerStore((state) => state.toggle)  
 
   return (
     <>
@@ -17,20 +22,19 @@ const ToBuyTicket = () => {
             </h1>
             <div className="bg-slate-300 border-4 border-slate-300 hover:border-white rounded-3xl sm:self-center
              mb-5 mx-10 md:mx-12 md:my-3 sm:py-2 sm:px-2 sm:mr-3">
-              <button className="py-3 text-slate-400 hover:text-slate-800">
-              {/* <Link to="../../../views/count">PASSENGERS</Link> */}
+              <button className="py-3 text-slate-400 hover:text-slate-800" onClick={toggle}>
                 PASSENGERS
               </button>
               <Count/>
               <div className="flex justify-evenly">
-                {passengers === 1 ? <Passenger /> : <Passengers />}
+                {count === 1 ? <Passenger /> : <Passengers />}
                 <h1 className="text-2xl">
-                  {passengers} {passengers === 1 ? "Persona" : "Personas"}
+                  {count} {count === 1 ? "Persona" : "Personas"}
                 </h1>
               </div>
             </div>
             <button className="font-semibold bg-red-500 hover:bg-red-600 rounded-3xl text-white py-6 mx-32 sm:px-6 sm:mx-5 md:mx-5 md:px-6">
-              <Link to="../../../views/form">Register</Link>
+              <Link to="../../form">Register</Link>
             </button>
           </div>
         </div>

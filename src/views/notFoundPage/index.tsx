@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Layout } from "../../components/organisms";
 
 const NotFoundPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <Layout>
       <div className="bg-indigo-300 py-3 mb-4">

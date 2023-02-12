@@ -13,7 +13,7 @@ const Routes = () => {
       <div>
         <Router>
           <Switch>
-            <Route path="/" element={<Form />} />
+            <Route path="/form" element={<Form />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/home" element={<Home />} />

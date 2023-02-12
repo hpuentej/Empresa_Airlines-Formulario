@@ -7,7 +7,7 @@ const Minus = () => {
         viewBox="0 0 24 24" 
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-8 h-8 text-slate-400 hover:text-slate-900
+        className="w-7 h-7 text-slate-400 hover:text-slate-900
         font-extrabold"
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
