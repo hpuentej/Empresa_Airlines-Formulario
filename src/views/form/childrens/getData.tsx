@@ -13,7 +13,7 @@ const GetData = () => {
 
   const clients: number[] = Array(passengers).fill(0);
   const data = clients.map((_, index) => (
-    <div>
+    <div key={index} >
       <h1 className="text-3xl flex justify-center mb-10">Pasajero {index + 1}</h1>
       <Data/>
     </div>

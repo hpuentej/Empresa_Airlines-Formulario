@@ -5,11 +5,11 @@ type FormData = {
   firstName: string;
   lastName: string;
   nationality: string;
-  document: number;
-  documentNumber: number;
-  DNI: number;
-  CE: string;
-  passport: string;
+  // document: number;
+  // documentNumber: number;
+  // DNI: number;
+  // CE: string;
+  // passport: string;
 }
 
 const Data = () => {
@@ -19,7 +19,7 @@ const Data = () => {
   return (
     <>
       <form onSubmit={onSubmit} className="w-full max-w-lg mb-10">
-        <div className="flex flex-wrap -mx-3 mb-6">
+        {/* <div className="flex flex-wrap -mx-3 mb-6"> */}
           {/* Inicio de nombre */}
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label 
@@ -32,7 +32,7 @@ const Data = () => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               // id="grid-first-name"
               type="text"
-              placeholder="Hans"
+              // placeholder="Hans"
               {...register("firstName")}
             />
             <p className="text-red-500 text-xs italic">
@@ -40,7 +40,7 @@ const Data = () => {
             </p>
           </div>
           {/* Fin de nombre */}
-          <div className="w-full md:w-1/2 px-3">
+          {/* <div className="w-full md:w-1/2 px-3">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               // htmlFor="grid-last-name"
@@ -109,7 +109,7 @@ const Data = () => {
               {...register("documentNumber")}
             />
           </div>
-        </div>
+        </div> */}
         <button
           type="button"
           className="bg-white hover:bg-violet-700 text-violet-700 hover:text-white border-2
