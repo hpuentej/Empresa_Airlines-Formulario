@@ -1,151 +1,120 @@
 import { useForm } from "react-hook-form";
-import { Flecha } from "../../../assets/images/icons"
+// import { Flecha } from "../../../assets/images/icons"
+
+// type Document = {
+//   DNI: number;
+//   CE: string;
+//   passport: string;
+// }
 
 type FormData = {
-  firstName: string;
-  lastName: string;
-  nationality: string;
-  // document: number;
-  // documentNumber: number;
-  // DNI: number;
-  // CE: string;
-  // passport: string;
+  nombres: string
+  apellidos: string
+  nacionalidad: string
+  tipoDocumento: String
+  numeroDocumento: number | string
 }
 
 const Data = () => {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => console.log(data));
+
+  const documentType = watch("tipoDocumento");  
 
   return (
     <>
-      <form onSubmit={onSubmit} className="w-full max-w-lg mb-10">
-        {/* <div className="flex flex-wrap -mx-3 mb-6"> */}
-          {/* Inicio de nombre */}
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label 
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              // htmlFor="grid-first-name"
-            >
-              First Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              // id="grid-first-name"
-              type="text"
-              // placeholder="Hans"
-              {...register("firstName")}
-            />
-            <p className="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
-          </div>
-          {/* Fin de nombre */}
-          {/* <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              // htmlFor="grid-last-name"
-            >
-              Last Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              // id="grid-last-name"
-              type="text"
-              placeholder="Doe"
-              {...register("lastName")}
-            />
-          </div>
+      <form onSubmit={onSubmit} className="mb-10">
+        <div>
+          <label>NOMBRES</label>
+          <input placeholder="Como figura en su documento de viaje"
+            {...register("nombres", {
+              required: true,
+              maxLength: 28,
+              pattern: /^[a-zA-ZÀ-ÿ\u00f1\u00d1\u0027\u0022\s]{1,40}$/
+              })
+            } maxLength={30}/>
+            { errors.nombres?.type === "required" && <h1 className="text-red-500">El nombre es requerido</h1>}
+            { errors.nombres?.type === "maxLength" && <h1 className="text-red-500">El nombre debe tener como máximo 28 caracteres</h1>}
+            { errors.nombres?.type === "pattern" && <h1 className="text-red-500">Ingresa un nombre válido</h1>
+          }
         </div>
+        <div>
+          <label>APELLIDOS</label>
+          <input placeholder="Como figura en su documento de viaje"
+            {...register("apellidos", {
+              required: true,
+              maxLength: 28,
+              pattern: /^[a-zA-ZÀ-ÿ\u00f1\u00d1\u0027\u0022\s]{1,40}$/
+              })
+            } maxLength={30}/>
+            { errors.apellidos?.type === "required" && <h1 className="text-red-500">El apellido es requerido</h1>}
+            { errors.apellidos?.type === "maxLength" && <h1 className="text-red-500">El apellido debe tener como máximo 28 caracteres</h1>}
+            { errors.apellidos?.type === "pattern" && <h1 className="text-red-500">Ingresa un apellido válido</h1>
+          }
+        </div>
+        <div>
+          <label>NACIONALIDAD</label>
+          <input placeholder="Ej: Peruano"
+            {...register("nacionalidad", {
+              required: true,
+              maxLength: 30,
+              pattern:/^[A-Za-z\s]+$/
+              })
+            } maxLength={32}/>
+            { errors.nacionalidad?.type === "required" && <h1 className="text-red-500">La nacionalidad es requerida</h1>}
+            { errors.nacionalidad?.type === "maxLength" && <h1 className="text-red-500">La nacionalidad debe tener como máximo 30 caracteres</h1>}
+            { errors.nacionalidad?.type === "pattern" && <h1 className="text-red-500">Ingresa una nacionalidad válida</h1>}
+        </div>
+        
+        <div>
+          <label>TIPO DE DOCUMENTO</label>
+          <select {...register("tipoDocumento")}>
+            <option value="">Elige una opción</option>
+            <option value="DNI">DNI</option>
+            <option value="CE">CE</option>
+            <option value="passport">Pasaporte</option>
+          </select>
+        </div>
+        <div>
+          { documentType === "DNI" && <div>
+            <label>NÚMERO DE DNI</label>
+            <input {...register("numeroDocumento", 
+              { required: true, maxLength: 8, pattern: /^[0-9]{8}$/ })} maxLength={8}/>
+              { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de DNI es requerido</h1>}
+              { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de DNI debe tener como máximo 8 caracteres</h1>}
+              { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de DNI válido</h1>}
+          </div>}
+          
+          { documentType === "CE" && <div>
+            <label>NÚMERO DE CE</label>
+            <input {...register("numeroDocumento",
+              { required: true, maxLength: 9, pattern: /^[0-9A-Za-z]{9}$/ })} maxLength={9}/>
+              { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de CE es requerido</h1>}
+              { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de CE debe tener como máximo 9 caracteres</h1>}
+              { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de CE válido</h1>}
+          </div>}
 
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-city"
-            >
-              Nationality
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-city"
-              type="text"
-              placeholder="Albuquerque"
-              {...register("nationality")}
-            />
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-state"
-            >
-              Document type
-            </label>
-            <div className="relative">
-              <select {...register("document")}
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                //  id="grid-state"
-              >
-                <option value="DNI">DNI</option>
-                <option value="CE" >CE</option>
-                <option value="Passport">Passport</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <Flecha/>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-last-name"
-            >
-              Document number
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-last-name"
-              type="text"
-              placeholder="Doe"
-              {...register("documentNumber")}
-            />
-          </div>
-        </div> */}
+          { documentType === "passport" && <div>
+            <label>NÚMERO DE PASAPORTE</label>
+            <input {...register("numeroDocumento",
+              { required: true, maxLength: 9, pattern: /^[0-9]{9}$/ })} maxLength={9}/>
+              { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de pasaporte es requerido</h1>}
+              { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de pasaporte debe tener como máximo 9 caracteres</h1>}
+              { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de pasaporte válido</h1>}
+          </div> }
+
+        </div>
         <button
-          type="button"
-          className="bg-white hover:bg-violet-700 text-violet-700 hover:text-white border-2
-          border-violet-700 font-bold py-2 px-4 rounded-full "
-          onClick={() => {
-            setValue("lastName", "Puente");
-            setValue("firstName", "Hans");
-          }}
-        >
-          Agregar datos del pasajero {}
-        </button>
-        </form>
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+          // setValues
+          
 
-          {/* <form onSubmit={onSubmit} className="mb-10">
-            <div>
-              <label>First Name</label>
-              <input {...register("firstName")} />
-            </div>
-            <div>
-              <label>Last Name</label>
-              <input {...register("lastName")} />
-            </div>
-            <div>
-              <label>Nationality</label>
-              <input {...register("lastName")} />
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                setValue("lastName", "Puente");
-                setValue("firstName", "Hans");
-              }}
-            >
-              SetValue
-            </button>
-        </form> */}
+
+        >
+          SetValue
+        </button>
+      </form>
     </>
   )
 }
