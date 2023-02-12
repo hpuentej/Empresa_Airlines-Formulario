@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-
+import { usePassengerStore } from "../../../zustand/formStore";
+import { shallow } from "zustand/shallow";
+import { useEffect } from "react";
 
 enum Document {
   DNI = "DNI",
@@ -16,15 +18,32 @@ interface FormData {
 }
 
 const Data = () => {
-  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => console.log(data));
 
-  const documentType = watch("tipoDocumento");
+  // Hook form methods
+  const { register, getValues, watch, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const onSubmit = handleSubmit(() => {});
+  
+  // Watch form values
+  const nombres = watch("nombres")
+  const apellidos = watch("apellidos")
+  const nacionalidad = watch("nacionalidad")
+  const documentType = watch("tipoDocumento")
+  const numeroDocumento = watch("numeroDocumento")
+
+  const isValid = nombres && apellidos && nacionalidad && documentType && numeroDocumento
+
+  // Zustand methods
+  const { count, clients } = usePassengerStore((state) => ({
+    count: state.count,
+    clients: state.clients
+  }), shallow);
 
   return (
     <>
       <form onSubmit={onSubmit} className="mb-10">
         <div>
+          {/* <h1>{clients[0].nombres}</h1> */}
+          {/* <h1>{count}</h1> */}
           <label>NOMBRES</label>
           <input placeholder="Como figura en su documento de viaje"
             {...register("nombres", {
@@ -104,16 +123,16 @@ const Data = () => {
           </div> }
 
         </div>
-        <button
+        <button type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          type="submit"
-          // setValues
-
-
-
+          disabled= {!isValid}
+          onClick={() => {
+            const client =  getValues()
+            console.log(client)
+          }}
         >
           SetValue
-        </button>
+        </button >
       </form>
     </>
   )
