@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Layout } from "../../components/organisms";
 import { Plus, Minus, Ellipsis } from "../../assets/images/icons";
 import { usePassengerStore } from "../../zustand/formStore";
 import { shallow } from "zustand/shallow";
@@ -20,8 +19,7 @@ const Count = () => {
   }, []);
 
   return (
-    <>
-      <Layout>
+    <>      
         {visibility && (
           <div className="w-screen h-screen fixed top-0 left-0 bg-black opacity-80 flex justify-center items-center p-10">
             <div className="w-96 h-60 bg-white relative rounded-lg shadow-2xl p-5">
@@ -63,8 +61,7 @@ const Count = () => {
               </button>
             </div>
           </div>
-        )}
-      </Layout>
+        )}      
     </>
   );
 };
