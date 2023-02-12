@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 
-interface CounterState {  
-  nombres: string;
-  apellidos: string;
+interface formState {
+  count: number
+  visibility: boolean
+  clients: string[]
 }
 
-export const useClientStore = create<CounterState>(() => ({  
-  nombres: 'Hans Junior',
-  apellidos: 'Puente Jara',
+export const usePassengerStore = create<formState>(() => ({
+  count: 1,
+  visibility: true,
+  clients: [],
 }))

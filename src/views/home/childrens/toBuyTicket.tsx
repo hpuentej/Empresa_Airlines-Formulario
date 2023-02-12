@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Passenger from "../../../assets/images/icons/passenger";
-import Passengers from "../../../assets/images/icons/passengers";
+import {Passenger, Passengers} from "../../../assets/images/icons";
+import { Count} from "../../../views"
 
 const ToBuyTicket = () => {
   const [passengers, setPassengers] = useState(1);
@@ -17,9 +17,11 @@ const ToBuyTicket = () => {
             </h1>
             <div className="bg-slate-300 border-4 border-slate-300 hover:border-white rounded-3xl sm:self-center
              mb-5 mx-10 md:mx-12 md:my-3 sm:py-2 sm:px-2 sm:mr-3">
-              <h1 className="py-3 text-slate-400 hover:text-slate-800">
+              <button className="py-3 text-slate-400 hover:text-slate-800">
+              {/* <Link to="../../../views/count">PASSENGERS</Link> */}
                 PASSENGERS
-              </h1>
+              </button>
+              <Count/>
               <div className="flex justify-evenly">
                 {passengers === 1 ? <Passenger /> : <Passengers />}
                 <h1 className="text-2xl">
@@ -28,7 +30,7 @@ const ToBuyTicket = () => {
               </div>
             </div>
             <button className="font-semibold bg-red-500 hover:bg-red-600 rounded-3xl text-white py-6 mx-32 sm:px-6 sm:mx-5 md:mx-5 md:px-6">
-              <Link to="../../form">Register</Link>
+              <Link to="../../../views/form">Register</Link>
             </button>
           </div>
         </div>

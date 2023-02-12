@@ -1,4 +1,4 @@
-const passengers = () => {
+const Passengers = () => {
   return (
     <>
       <svg
@@ -13,4 +13,4 @@ const passengers = () => {
   );
 };
 
-export default passengers;
+export default Passengers;

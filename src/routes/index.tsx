@@ -4,7 +4,7 @@ import {
   Routes as Switch,
   Route,
 } from "react-router-dom";
-import { Form, Confirmation, Home } from "../views";
+import { Form, Confirmation, Home, Count } from "../views";
 import { NotFoundPage } from "../views";
 
 const Routes = () => {
@@ -17,6 +17,7 @@ const Routes = () => {
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/count" element={<Count />} />
           </Switch>
         </Router>
       </div>
