@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
-// import { Flecha } from "../../../assets/images/icons"
 
-// type Document = {
-//   DNI: number;
-//   CE: string;
-//   passport: string;
-// }
 
-type FormData = {
+enum Document {
+  DNI = "DNI",
+  CE = "CE",
+  passport = "passport"
+}
+
+interface FormData {
   nombres: string
   apellidos: string
   nacionalidad: string
-  tipoDocumento: String
+  tipoDocumento: Document
   numeroDocumento: number | string
 }
 
@@ -19,7 +19,7 @@ const Data = () => {
   const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => console.log(data));
 
-  const documentType = watch("tipoDocumento");  
+  const documentType = watch("tipoDocumento");
 
   return (
     <>
@@ -79,7 +79,7 @@ const Data = () => {
           { documentType === "DNI" && <div>
             <label>NÚMERO DE DNI</label>
             <input {...register("numeroDocumento", 
-              { required: true, maxLength: 8, pattern: /^[0-9]{8}$/ })} maxLength={8}/>
+              { required: true, maxLength: 8, pattern: /^[0-9]{1,8}$/ })} maxLength={8}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de DNI es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de DNI debe tener como máximo 8 caracteres</h1>}
               { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de DNI válido</h1>}
@@ -88,7 +88,7 @@ const Data = () => {
           { documentType === "CE" && <div>
             <label>NÚMERO DE CE</label>
             <input {...register("numeroDocumento",
-              { required: true, maxLength: 9, pattern: /^[0-9A-Za-z]{9}$/ })} maxLength={9}/>
+              { required: true, maxLength: 9, pattern: /^[0-9A-Za-z]{1,9}$/ })} maxLength={9}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de CE es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de CE debe tener como máximo 9 caracteres</h1>}
               { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de CE válido</h1>}
@@ -97,7 +97,7 @@ const Data = () => {
           { documentType === "passport" && <div>
             <label>NÚMERO DE PASAPORTE</label>
             <input {...register("numeroDocumento",
-              { required: true, maxLength: 9, pattern: /^[0-9]{9}$/ })} maxLength={9}/>
+              { required: true, maxLength: 9, pattern: /^[0-9]{1,9}$/ })} maxLength={9}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de pasaporte es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de pasaporte debe tener como máximo 9 caracteres</h1>}
               { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de pasaporte válido</h1>}
@@ -108,7 +108,7 @@ const Data = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           type="submit"
           // setValues
-          
+
 
 
         >
