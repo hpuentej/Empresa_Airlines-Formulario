@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Empresa_Airlines-Formulario
-=======
 # Empresa_Airlines-Formulario
 Este proyecto es el reto técnico para la posición de trainee en la empresa Tekton. Del 06 al 13 de Febrero del 2023.
 Se busca en todo momento que el proyecto sea responsivo y tenga calidad de producción.
@@ -28,7 +25,3 @@ Para desarrollar el formulario utilicé la librería React Hook Form
 ### Manejo de estilos
 Para darle estilos al proyecto utilicé la librería Tailwind.
 [Tailwindcss](https://tailwindcss.com/)
-
-
-
->>>>>>> 998076a3db2bce0b059caf2d4955cb7849cd0d98
