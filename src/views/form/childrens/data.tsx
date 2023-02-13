@@ -8,7 +8,7 @@ enum Document {
   passport = "passport"
 }
 
-interface FormData {
+interface FormData {  
   nombres: string
   apellidos: string
   nacionalidad: string
@@ -147,9 +147,10 @@ const Data = () => {
             disabled= {!isValid}
             onClick={() => {
               const client =  getValues()
-              console.log(client)
-              clients.length < 4 ? addClient(client) : alert("Solo se pueden agregar 4 pasajeros") 
-              isSubmitSuccessful && console.log(clients)
+              const clientData = {...client , id: clients.length + 1}
+              console.log(clientData)
+              clients.length < 4 ? addClient(clientData) : alert("Solo se pueden agregar 4 pasajeros") 
+              // isSubmitSuccessful && console.log(clients)
             }}
           >
             Add Passenger

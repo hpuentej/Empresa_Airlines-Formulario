@@ -8,6 +8,8 @@ const Data = () => {
     clients: state.clients
   }), shallow);
 
+  const setClients = usePassengerStore((state) => state.setClients)
+
   const passangersView = clients.map((client, index) => {
     return(
         <div key={index}  className="flex flex-col mb-2 border-2 border-slate-100 border-b-violet-300 p-2
@@ -23,7 +25,8 @@ const Data = () => {
               <button className=" border-2 border-red-400 text-red-400 px-2 rounded
               hover:border-red-500 hover:text-red-500 mx-10"
               onClick={() => {
-                const newLista = clients.filter((client) => client !== index);
+                const newLista = clients.filter((client) => client.id !== index + 1 )
+                setClients(newLista);
               }}
               >
                 Eliminar
