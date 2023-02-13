@@ -1,3 +1,5 @@
+// Manejo de estado global del formulario
+
 import { create } from "zustand";
 
 interface formState {
@@ -16,14 +18,13 @@ interface formState {
   decrement: () => void;
   toggle: () => void;  
   addClient: (client: { nombres: string; apellidos: string; nacionalidad: string; tipoDocumento: string; numeroDocumento:string | number; }) => void;
-  // setMessage: () => void;  
+  
 }
 
 export const usePassengerStore = create<formState>((set, get) => ({
   count: 1,
   passengers: 1,
   visibility: false,
-  // message: "Passenger agregado correctamente",
   clients: [],
   increment: () =>
     set((state) => {
@@ -37,6 +38,6 @@ export const usePassengerStore = create<formState>((set, get) => ({
       passengers: get().count,
     })),
   addClient: (client) => set((state) => ({ ...state, clients: [...get().clients, client]})),
-  // setMessage: () => set((state) => ({ ...state, message: get().message })),
+  
   
 }));

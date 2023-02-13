@@ -19,8 +19,7 @@ interface FormData {
 const Data = () => {
 
   // Zustand methods
-  const { count, clients } = usePassengerStore((state) => ({
-    count: state.count,
+  const { clients } = usePassengerStore((state) => ({
     clients: state.clients
   }), shallow);
 
@@ -49,6 +48,7 @@ const Data = () => {
     <>
       <form onSubmit={onSubmit} className="mb-10">
         <div className="flex flex-col mb-2">
+          { clients.length === 4   && <h1 className="text-orange-500 mb-5">El número de pasajeros agregados ya es 4. Click en revisar los datos ingresados</h1> }
           <label>NOMBRES</label>
           <input 
             className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
@@ -147,7 +147,9 @@ const Data = () => {
             disabled= {!isValid}
             onClick={() => {
               const client =  getValues()
+              console.log(client)
               clients.length < 4 ? addClient(client) : alert("Solo se pueden agregar 4 pasajeros") 
+              isSubmitSuccessful && console.log(clients)
             }}
           >
             Add Passenger
