@@ -18,9 +18,23 @@ interface FormData {
 
 const Data = () => {
 
+  // Zustand methods
+  const { count, clients } = usePassengerStore((state) => ({
+    count: state.count,
+    clients: state.clients
+  }), shallow);
+
+  const addClient = usePassengerStore((state) => state.addClient)
+  // const setMessage = usePassengerStore((state) => state.setMessage)
+
   // Hook form methods
-  const { register, getValues, watch, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit(() => {});
+  const { register, getValues, watch, handleSubmit, formState: {isSubmitSuccessful},
+          formState: { errors } } = useForm<FormData>();
+  const onSubmit = handleSubmit((data, e) => {
+    e?.target.reset()
+    // console.log(data);
+    // setMessage();
+  });
   
   // Watch form values
   const nombres = watch("nombres")
@@ -29,15 +43,7 @@ const Data = () => {
   const documentType = watch("tipoDocumento")
   const numeroDocumento = watch("numeroDocumento")
 
-  const isValid = nombres && apellidos && nacionalidad && documentType && numeroDocumento && !errors.nombres && !errors.apellidos && !errors.nacionalidad && !errors.tipoDocumento && !errors.numeroDocumento ? true : false
-
-  // Zustand methods
-  const { count, clients } = usePassengerStore((state) => ({
-    count: state.count,
-    clients: state.clients
-  }), shallow);
-
-  const addClient = usePassengerStore((state) => state.addClient)  
+  const isValid = nombres && apellidos && nacionalidad && documentType && numeroDocumento && !errors.nombres && !errors.apellidos && !errors.nacionalidad && !errors.tipoDocumento && !errors.numeroDocumento ? true : false 
 
   return (
     <>
@@ -134,9 +140,9 @@ const Data = () => {
           </div> }
 
         </div>
-        <div>
+        <div className="flex justify-between">
           <button type="submit" 
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5
             ${isValid ? '' : 'opacity-50 cursor-not-allowed'}`}
             disabled= {!isValid}
             onClick={() => {
@@ -146,6 +152,7 @@ const Data = () => {
           >
             Add Passenger
           </button >
+          { isSubmitSuccessful && <h1 className="text-green-500 self-center">Pasajero agregado correctamente</h1> }
         </div>
       </form>
     </>
