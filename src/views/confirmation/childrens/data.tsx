@@ -25,7 +25,8 @@ const Data = () => {
               <button className=" border-2 border-red-400 text-red-400 px-2 rounded
               hover:border-red-500 hover:text-red-500 mx-10"
               onClick={() => {
-                const newLista = clients.filter((client) => client.id !== index + 1 )
+                // const newLista = clients.filter((client) => client.id !==  index + 1)
+                const newLista = clients.filter((thisClient) => thisClient.id !==  client.id)
                 setClients(newLista);
               }}
               >

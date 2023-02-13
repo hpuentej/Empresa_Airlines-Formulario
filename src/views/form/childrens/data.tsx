@@ -147,7 +147,7 @@ const Data = () => {
             disabled= {!isValid}
             onClick={() => {
               const client =  getValues()
-              const clientData = {...client , id: clients.length + 1}
+              const clientData = {...client , id: Date.now()}
               console.log(clientData)
               clients.length < 4 ? addClient(clientData) : alert("Solo se pueden agregar 4 pasajeros") 
               // isSubmitSuccessful && console.log(clients)
