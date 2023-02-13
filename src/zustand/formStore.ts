@@ -9,26 +9,20 @@ interface formState {
     apellidos: string;
     nacionalidad: string;
     tipoDocumento: string;
-    numeroDocumento: string;
+    numeroDocumento: string | number;
   }[];
   increment: () => void;
   decrement: () => void;
-  toggle: () => void;
+  toggle: () => void;  
+  addClient: (client: { nombres: string; apellidos: string; nacionalidad: string; tipoDocumento: string; numeroDocumento:string | number; }) => void;
+  
 }
 
 export const usePassengerStore = create<formState>((set, get) => ({
   count: 1,
   passengers: 1,
   visibility: false,
-  clients: [
-    {
-      nombres: "Alex",
-      apellidos: "Tito",
-      nacionalidad: "",
-      tipoDocumento: "",
-      numeroDocumento: "",
-    },
-  ],
+  clients: [],
   increment: () =>
     set((state) => {
       return { ...state, count: get().count + 1 };
@@ -40,4 +34,7 @@ export const usePassengerStore = create<formState>((set, get) => ({
       visibility: !get().visibility,
       passengers: get().count,
     })),
+  addClient: (client) => set((state) => ({ ...state, clients: [...get().clients, client]}))
+    
+  
 }));

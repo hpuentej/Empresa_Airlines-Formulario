@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { usePassengerStore } from "../../../zustand/formStore";
 import { shallow } from "zustand/shallow";
-import { useEffect } from "react";
 
 enum Document {
   DNI = "DNI",
@@ -30,7 +29,7 @@ const Data = () => {
   const documentType = watch("tipoDocumento")
   const numeroDocumento = watch("numeroDocumento")
 
-  const isValid = nombres && apellidos && nacionalidad && documentType && numeroDocumento
+  const isValid = nombres && apellidos && nacionalidad && documentType && numeroDocumento && !errors.nombres && !errors.apellidos && !errors.nacionalidad && !errors.tipoDocumento && !errors.numeroDocumento ? true : false
 
   // Zustand methods
   const { count, clients } = usePassengerStore((state) => ({
@@ -38,14 +37,16 @@ const Data = () => {
     clients: state.clients
   }), shallow);
 
+  const addClient = usePassengerStore((state) => state.addClient)  
+
   return (
     <>
       <form onSubmit={onSubmit} className="mb-10">
-        <div>
-          {/* <h1>{clients[0].nombres}</h1> */}
-          {/* <h1>{count}</h1> */}
+        <div className="flex flex-col mb-2">
           <label>NOMBRES</label>
-          <input placeholder="Como figura en su documento de viaje"
+          <input 
+            className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+            placeholder="Como figura en su documento de viaje"
             {...register("nombres", {
               required: true,
               maxLength: 28,
@@ -57,9 +58,11 @@ const Data = () => {
             { errors.nombres?.type === "pattern" && <h1 className="text-red-500">Ingresa un nombre válido</h1>
           }
         </div>
-        <div>
+        <div className="flex flex-col mb-2">
           <label>APELLIDOS</label>
-          <input placeholder="Como figura en su documento de viaje"
+          <input 
+            className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+            placeholder="Como figura en su documento de viaje"
             {...register("apellidos", {
               required: true,
               maxLength: 28,
@@ -71,9 +74,11 @@ const Data = () => {
             { errors.apellidos?.type === "pattern" && <h1 className="text-red-500">Ingresa un apellido válido</h1>
           }
         </div>
-        <div>
+        <div className="flex flex-col mb-2">
           <label>NACIONALIDAD</label>
-          <input placeholder="Ej: Peruano"
+          <input 
+            className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+            placeholder="Ej: Peruano"
             {...register("nacionalidad", {
               required: true,
               maxLength: 30,
@@ -85,8 +90,8 @@ const Data = () => {
             { errors.nacionalidad?.type === "pattern" && <h1 className="text-red-500">Ingresa una nacionalidad válida</h1>}
         </div>
         
-        <div>
-          <label>TIPO DE DOCUMENTO</label>
+        <div className="flex mb-5">
+          <label className="mr-5">TIPO DE DOCUMENTO</label>
           <select {...register("tipoDocumento")}>
             <option value="">Elige una opción</option>
             <option value="DNI">DNI</option>
@@ -95,27 +100,33 @@ const Data = () => {
           </select>
         </div>
         <div>
-          { documentType === "DNI" && <div>
-            <label>NÚMERO DE DNI</label>
-            <input {...register("numeroDocumento", 
+          { documentType === "DNI" && <div className="mb-5">
+            <label className="mr-5 self-center">NÚMERO DE DNI</label>
+            <input 
+              className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+              {...register("numeroDocumento", 
               { required: true, maxLength: 8, pattern: /^[0-9]{1,8}$/ })} maxLength={8}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de DNI es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de DNI debe tener como máximo 8 caracteres</h1>}
               { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de DNI válido</h1>}
           </div>}
           
-          { documentType === "CE" && <div>
-            <label>NÚMERO DE CE</label>
-            <input {...register("numeroDocumento",
+          { documentType === "CE" && <div className="mb-5">
+            <label className="mr-5 self-center">NÚMERO DE CE</label>
+            <input 
+              className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+              {...register("numeroDocumento",
               { required: true, maxLength: 9, pattern: /^[0-9A-Za-z]{1,9}$/ })} maxLength={9}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de CE es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de CE debe tener como máximo 9 caracteres</h1>}
               { errors.numeroDocumento?.type === "pattern" && <h1 className="text-red-500">Ingresa un número de CE válido</h1>}
           </div>}
 
-          { documentType === "passport" && <div>
-            <label>NÚMERO DE PASAPORTE</label>
-            <input {...register("numeroDocumento",
+          { documentType === "passport" && <div className="mb-5">
+            <label className="mr-5 self-center">NÚMERO DE PASAPORTE</label>
+            <input 
+              className="border-2 rounded p-2 focus:outline-none focus:bg-white focus:border-violet-500"
+              {...register("numeroDocumento",
               { required: true, maxLength: 9, pattern: /^[0-9]{1,9}$/ })} maxLength={9}/>
               { errors.numeroDocumento?.type === "required" && <h1 className="text-red-500">El número de pasaporte es requerido</h1>}
               { errors.numeroDocumento?.type === "maxLength" && <h1 className="text-red-500">El número de pasaporte debe tener como máximo 9 caracteres</h1>}
@@ -123,16 +134,19 @@ const Data = () => {
           </div> }
 
         </div>
-        <button type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          disabled= {!isValid}
-          onClick={() => {
-            const client =  getValues()
-            console.log(client)
-          }}
-        >
-          SetValue
-        </button >
+        <div>
+          <button type="submit" 
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+            ${isValid ? '' : 'opacity-50 cursor-not-allowed'}`}
+            disabled= {!isValid}
+            onClick={() => {
+              const client =  getValues()
+              clients.length < 4 ? addClient(client) : alert("Solo se pueden agregar 4 pasajeros") 
+            }}
+          >
+            Add Passenger
+          </button >
+        </div>
       </form>
     </>
   )
