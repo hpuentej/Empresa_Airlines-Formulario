@@ -1,6 +1,5 @@
 # Empresa_Airlines-Formulario
-Este proyecto es el reto técnico para la posición de trainee en la empresa Tekton. Del 06 al 13 de Febrero del 2023.
-Se busca en todo momento que el proyecto sea responsivo y tenga calidad de producción.
+Este es un proyecto Frontend utilizando React y TypeScript.
 ## Estructura general del proyecto
 Este proyecto es un formulario de registro de clientes de vuelo. Consta de tres páginas, en las rutas:
 ### http://localhost:5173/home
@@ -12,16 +11,16 @@ Aquí se visualizan los datos registrados de los clientes. Si hay algún error e
 
 ## Tecnologías utilizadas
 ### Lenguaje de programación
-Este proyecto fue desarrollado enteramente en TypeScript; desde la generación de la estructura de carpetas, hasta los tipos de datos utilizados.
+Este proyecto es desarrollado enteramente en TypeScript; desde la generación de la estructura de carpetas, hasta los tipos de datos utilizados.
 ### Manejo de estados
-Para la gestión del estado de manera global, utilicé la librería Zustand.
+Para la gestión del estado de manera global, se utiliza la librería Zustand.
 [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 ### Manejo de rutas
-Para el enrutamiento usé la librería React Router Dom.
+Para el enrutamiento se usa la librería React Router Dom.
 [React Router](https://reactrouter.com/en/main/start/tutorial)
 ### Desarrollo del formulario
-Para desarrollar el formulario utilicé la librería React Hook Form
+Para desarrollar el formulario se implementa la librería React Hook Form
 [Hook Form](https://react-hook-form.com/get-started)
 ### Manejo de estilos
-Para darle estilos al proyecto utilicé la librería Tailwind.
+Para darle estilos al proyecto se maneja la librería Tailwind.
 [Tailwindcss](https://tailwindcss.com/)
