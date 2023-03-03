@@ -7,7 +7,8 @@ Esta es la ruta inicial, aquí el cliente tiene la opción de elegir el número 
 ### http://localhost:5173/form
 Aquí se registran los datos de los clientes. El número máximo de clientes es 4.
 ### http://localhost:5173/confirmation
-Aquí se visualizan los datos registrados de los clientes. Si hay algún error en los datos de un cliente, este lo puede eliminar; y luego si se desea se puede volver a agregar dinámicamente los datos correctos del pasajero, puede hacer click en Agregar nuevo pasajero.
+Aquí se visualizan los datos registrados de los clientes. 
+Si hay algún error en los datos de un cliente, este puede ser eliminado. Si se desea, se pueden volver a agregar los datos del pasajero; esto, haciendo click en "agregar nuevo pasajero".
 
 ## Tecnologías utilizadas
 ### Lenguaje de programación
